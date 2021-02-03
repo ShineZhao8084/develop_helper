@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.dh.main.mapper.CaptchaMapper">
+  <resultMap id="BaseResultMap" type="com.asiainfo.dh.main.bean.Captcha">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SOURCE" jdbcType="VARCHAR" property="source" />
+    <result column="RECEIVER" jdbcType="VARCHAR" property="receiver" />
+    <result column="NT_ACCOUNT" jdbcType="VARCHAR" property="ntAccount" />
+    <result column="CAPTCHA" jdbcType="VARCHAR" property="captcha" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="RECEIVE_DATE" jdbcType="TIMESTAMP" property="receiveDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, `SOURCE`, RECEIVER, NT_ACCOUNT, CAPTCHA, CONTENT, RECEIVE_DATE, CREATE_DATE
+  </sql>
+  <select id="getPageCaptcha" parameterType="com.asiainfo.dh.main.bean.Captcha" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dh_captcha
+    where 1 = 1
+    <if test="source != null and source != ''">
+      AND SOURCE = #{source,jdbcType=VARCHAR}
+    </if>
+    <if test="receiver != null and receiver != ''">
+      AND RECEIVER = #{receiver, jdbcType=VARCHAR}
+    </if>
+    <if test="ntAccount != null and ntAccount != ''">
+      AND NT_ACCOUNT = #{ntAccount, jdbcType=VARCHAR}
+    </if>
+    ORDER BY CREATE_DATE DESC
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dh_captcha
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dh_captcha
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.asiainfo.dh.main.bean.Captcha">
+    insert into dh_captcha (ID, `SOURCE`, RECEIVER, 
+      NT_ACCOUNT, CAPTCHA, CONTENT, 
+      RECEIVE_DATE, CREATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
+      #{ntAccount,jdbcType=VARCHAR}, #{captcha,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{receiveDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.asiainfo.dh.main.bean.Captcha">
+    insert into dh_captcha
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="source != null">
+        `SOURCE`,
+      </if>
+      <if test="receiver != null">
+        RECEIVER,
+      </if>
+      <if test="ntAccount != null">
+        NT_ACCOUNT,
+      </if>
+      <if test="captcha != null">
+        CAPTCHA,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="receiveDate != null">
+        RECEIVE_DATE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null">
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="ntAccount != null">
+        #{ntAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null">
+        #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null">
+        #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.asiainfo.dh.main.bean.Captcha">
+    update dh_captcha
+    <set>
+      <if test="source != null">
+        `SOURCE` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null">
+        RECEIVER = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="ntAccount != null">
+        NT_ACCOUNT = #{ntAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null">
+        CAPTCHA = #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null">
+        RECEIVE_DATE = #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.asiainfo.dh.main.bean.Captcha">
+    update dh_captcha
+    set `SOURCE` = #{source,jdbcType=VARCHAR},
+      RECEIVER = #{receiver,jdbcType=VARCHAR},
+      NT_ACCOUNT = #{ntAccount,jdbcType=VARCHAR},
+      CAPTCHA = #{captcha,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      RECEIVE_DATE = #{receiveDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
