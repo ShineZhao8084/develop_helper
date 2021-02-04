@@ -1,4 +1,4 @@
-package com.asiainfo.dh.core.config;
+package com.asiainfo.dh.core.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
