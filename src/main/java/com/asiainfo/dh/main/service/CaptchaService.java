@@ -8,4 +8,5 @@ public interface CaptchaService {
 
     PageInfo<Captcha> getPageCaptcha(PageBean<Captcha> pageBean) throws Exception;
 
+    void insertCaptcha(Captcha captcha) throws Exception;
 }

@@ -52,9 +52,6 @@
   <insert id="insertSelective" parameterType="com.asiainfo.dh.main.bean.Captcha">
     insert into dh_captcha
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
       <if test="source != null">
         `SOURCE`,
       </if>
@@ -78,9 +75,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="source != null">
         #{source,jdbcType=VARCHAR},
       </if>

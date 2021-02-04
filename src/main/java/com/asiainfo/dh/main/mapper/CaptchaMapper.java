@@ -20,4 +20,5 @@ public interface CaptchaMapper {
     int updateByPrimaryKey(Captcha record);
 
     List<Captcha> getPageCaptcha(Captcha record);
+
 }

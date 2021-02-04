@@ -32,13 +32,10 @@ public class CaptchaController {
     }
 
     @RequestMapping(path = "/captcha", method = RequestMethod.PUT)
-    public String insertCaptcha() throws Exception {
-        /*APIResponse<PageInfo<Captcha>> response = new APIResponse<>();
-        boolean flag = captchaService.insertCaptcha(captcha);
-        response.setStatus("000");
-        return JSON.toJSONString(response);*/
-
-        throw new BusinessException(ResultInfo.UNKNOWNEXCEPTION);
+    public String insertCaptcha(@RequestBody Captcha captcha) throws Exception {
+        APIResponse<PageInfo<Captcha>> response = new APIResponse<>(ResultInfo.SUCCESS);
+        captchaService.insertCaptcha(captcha);
+        return JSON.toJSONString(response);
     }
 
 }
